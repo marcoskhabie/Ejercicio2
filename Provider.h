@@ -4,6 +4,9 @@
 
 #ifndef EJERCICIO2_PROVIDER_H
 #define EJERCICIO2_PROVIDER_H
+
+#include "Product.h"
+
 typedef struct provider{
 
     char* name;

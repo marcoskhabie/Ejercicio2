@@ -13,6 +13,8 @@ enum TypeOf{
 typedef struct product{
     char* name;
     int codeNumber;
+    int idProvider;
+    int idFactory;
     double price;
 
     int type; // 1 for camara, 0 for accessory.
@@ -26,8 +28,8 @@ typedef struct product{
     char* description;
 }Product;
 
-Product* createCamara(char* name, int codeNumber, double price, int type, double megaPixels, double screen, double zoom,enum Type);
-Product* createAccessory(char* name, int codeNumber, double price, int type, char* typeOfAccessory, char* description);
+Product* createCamara(char* name, int codeNumber, double price, int type, double megaPixels, double screen, double zoom,enum Type, int idProvider,int idFactory);
+Product* createAccessory(char* name, int codeNumber, double price, int type, char* typeOfAccessory, char* description, int idProvider,int idFactory);
 void destroyProduct(Product* product);
 
 #endif //EJERCICIO2_PRODUCT_H
