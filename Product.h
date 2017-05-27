@@ -29,9 +29,9 @@ typedef struct product{
 }Product;
 
 
-Product* createCamera(char* name,int typeOfCamera, int codeNumber, double price, int type, double megaPixels, double screen, double zoom, int idProvider,int idFactory);
+Product* createCamera(char* name,int typeOfCamera, int codeNumber, double price, double megaPixels, double screen, double zoom, int idProvider,int idFactory);
 
-Product* createAccessory(char* name, int codeNumber, double price, int type, char* typeOfAccessory, char* description, int idProvider,int idFactory);
+Product* createAccessory(char* name, int codeNumber, double price, char* typeOfAccessory, char* description, int idProvider,int idFactory);
 
 void printProduct(Product* product);
 void destroyProduct(Product* product);

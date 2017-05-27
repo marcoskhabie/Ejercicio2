@@ -12,7 +12,10 @@ void printListOfUsers(RegisteredUser** listOfUsers, int amt){
     }
 }
 
-RegisteredUser* findUser(int dni, RegisteredUser** listOfUsers, int amt){
+RegisteredUser* askForDNIAndfindUser(RegisteredUser** listOfUsers, int amt){
+    int dni;
+    printf("Enter the dni of the desired user: ");
+    scanf("%d", &dni);
     for (int i = 0; i < amt; ++i) {
         if(listOfUsers[i]->dni == dni){
             return listOfUsers[i];
@@ -33,52 +36,82 @@ int main() {
     listOfUsers[2] = admin1;
     listOfUsers[3] = admin2;
 
-    printListOfUsers(listOfUsers, 4);
+    Market* market = createMarket(10);
+    addNewProvider(market, createProvider("BestBuy", 1, "San Martin", 3020302, "pilar", "Buenos Aires", "Argentina",1202));
+    addNewProduct(market, createCamera("Canon", 1, 101, 4500,3.2,21.5,4,1,1));
+    /*
+     *
+     *
+     * Hay que hardcodear el market un poco.
+     *
+     *
+     */
 
+    int closeProgram = 0;
     RegisteredUser* selectedUser = listOfUsers[2];
 
+    while(closeProgram != 1) {
+        int action = -1;
+        printf("Current User: ");
+        printUser(selectedUser);
+        printf("\n");
+        if (selectedUser->type == 0) {
+            printf("<< CLIENT MENU >>\n"
+                           " 1 - Change user.\n"
+                           " 2 - Print list of products.\n"
+                           " 3 - Print my sales.\n"
+                           " 4 - Add new sale.\n"
+                           " 5 - Add new sale line to a sale.\n"
+                           " 6 - Close system.\n"
+                           "Enter your desired operation: ");
+            scanf("%d", &action);
+            printf("\n");
+
+            switch (action) {
+                case 1:
+                    printListOfUsers(listOfUsers, 4);
+                    selectedUser = askForDNIAndfindUser(listOfUsers,4);
+                    break;
+
+                case 6:
+                    closeProgram =1;
+                    printf("Hope the system was useful!");
+                    break;
+                default:
+                    printf("Please enter a valid operation! \n");
+                    break;
+            }
+        }
+        else {
+            printf("<< ADMIN MENU >>\n"
+                           " 1 - Change user.\n"
+                           " 2 - Get information of market.\n"
+                           " 3 - Register new product.\n"
+                           " 4 - Register new provider.\n"
+                           " 5 - Register new factory.\n"
+                           " 6 - Close system.\n"
+                           "Enter your desired operation: ");
+            scanf("%d", &action);
+            printf("\n");
+
+            switch (action) {
+                case 1:
+                    printListOfUsers(listOfUsers, 4);
+                    selectedUser = askForDNIAndfindUser(listOfUsers,4);
+                    break;
+
+                case 6:
+                    closeProgram =1;
+                    printf("Hope the system was useful!");
+                    break;
+                default:
+                    printf("Please enter a valid operation! \n");
+                    break;
+            }
+        }
+    }
 
 
-
-
-
-//    printf("\nBefore starting the system, some people and materials where added \nto make it easier to see its functionality. \n");
-//    int action = -1;
-//    do{
-//        printf("Available operations:\n"
-//                       " 1 - List of people with their respective loans.\n"
-//                       " 2 - List of available material.\n"
-//                       " 3 - Add new person.\n"
-//                       " 4 - Add new material.\n"
-//                       " 5 - Person asks for a loan.\n"
-//                       " 6 - Person returns a loan.\n"
-//                       " 7 - Close system.\n"
-//                       "Enter your desired operation: ");
-//        scanf("%d",&action);
-//        printf("\n");
-//
-//        switch(action){
-//            case 1:
-//                break;
-//            case 2:
-//                break;
-//            case 3:
-//                break;
-//            case 4:
-//                break;
-//            case 5:
-//                break;
-//            case 6:
-//                break;
-//            case 7:
-//                printf("Hope the system was useful!");
-//                break;
-//            default:
-//                printf("Please enter a valid operation! \n");
-//                break;
-//        }
-//
-//    } while(action != 7);
 
     return 0;
 }

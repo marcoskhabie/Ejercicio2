@@ -11,6 +11,7 @@
 typedef struct provider{
 
     char* name;
+    int id;
 
     char* direction;
     int tel;
@@ -23,7 +24,7 @@ typedef struct provider{
 
 }Provider;
 
-Provider* createProvider(  char* name, char*  direction,int tel, char* locality, char* province, char* country,int zipCode);
+Provider* createProvider(  char* name,int id, char* direction,int tel, char* locality, char* province, char* country,int zipCode);
 void printProvider(Provider* provider);
 void freeProvider(Provider* provider);
 

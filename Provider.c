@@ -7,7 +7,7 @@
 #include <printf.h>
 #include "Provider.h"
 
-Provider* createProvider(  char* name,  char* direction,int tel, char* locality, char* province, char* country,int zipCode){
+Provider* createProvider(  char* name,int id, char* direction,int tel, char* locality, char* province, char* country,int zipCode){
 
     Provider* newProvider= malloc(sizeof(Provider));
 
@@ -26,6 +26,7 @@ Provider* createProvider(  char* name,  char* direction,int tel, char* locality,
 
     newProvider->tel=tel;
     newProvider->zipCode=zipCode;
+    newProvider->id = id;
 
     return newProvider;
 }

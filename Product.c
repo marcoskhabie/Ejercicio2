@@ -7,7 +7,7 @@
 #include <string.h>
 #include "Product.h"
 
-Product* createCamera(char* name,int typeOfCamera, int codeNumber, double price, int type, double megaPixels, double screen, double zoom, int idProvider,int idFactory){
+Product* createCamera(char* name,int typeOfCamera, int codeNumber, double price, double megaPixels, double screen, double zoom, int idProvider,int idFactory){
     Product* newProduct= malloc(sizeof(Product));
 
     newProduct->name= malloc(sizeof(char)* (strlen(name)+1));
@@ -16,7 +16,7 @@ Product* createCamera(char* name,int typeOfCamera, int codeNumber, double price,
     newProduct->codeNumber=codeNumber;
     newProduct->typeOfCamera=typeOfCamera;
     newProduct->price=price;
-    newProduct->type=type;
+    newProduct->type=1;
     newProduct->megaPixels=megaPixels;
     newProduct->screen=screen;
     newProduct->zoom=zoom;
@@ -27,7 +27,7 @@ Product* createCamera(char* name,int typeOfCamera, int codeNumber, double price,
 
 }
 
-Product* createAccessory(char* name, int codeNumber, double price, int type, char* typeOfAccessory, char* description, int idProvider,int idFactory){
+Product* createAccessory(char* name, int codeNumber, double price, char* typeOfAccessory, char* description, int idProvider,int idFactory){
 
     Product* newProduct= malloc(sizeof(Product));
 
@@ -41,7 +41,7 @@ Product* createAccessory(char* name, int codeNumber, double price, int type, cha
 
     newProduct->codeNumber=codeNumber;
     newProduct->price=price;
-    newProduct->type=type;
+    newProduct->type=0;
     newProduct->idFactory=idFactory;
     newProduct->idProvider=idProvider;
 
