@@ -12,19 +12,19 @@ typedef struct provider{
 
     char* name;
 
-    int direction;
+    char* direction;
     int tel;
-    int locality;
     char* province;
     char* country;
-    char* zipCode;
-    Product** productsToProvide;
+    char* locality;
+    int zipCode;
+
 
 
 }Provider;
 
-Provider* createProvider(    int direction,int tel, int locality, char* province, char* country,char* zipCode, Product** productsToProvide);
-
+Provider* createProvider(  char* name, char*  direction,int tel, char* locality, char* province, char* country,int zipCode);
+void printProvider(Provider* provider);
 void freeProvider(Provider* provider);
 
 #endif //EJERCICIO2_PROVIDER_H

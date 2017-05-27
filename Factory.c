@@ -5,6 +5,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <printf.h>
 #include "Factory.h"
 #include "Market.h"
 
@@ -20,6 +21,13 @@ Factory* createFactory(char* name, int id){
     return newFactory;
 
 }
+void printFactory(Factory* factory){
+
+    printf("Name of factory %s \n", factory->name);
+    printf("Code number: %d \n", factory->id);
+
+}
+
 void freeFactory(Factory* factory){
     free(factory->name);
     free(factory);
