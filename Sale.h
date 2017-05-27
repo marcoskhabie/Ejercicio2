@@ -13,10 +13,16 @@ typedef struct sale{
     double finalPrice;
     double discount;
 
-    SaleLine* saleLine;
+    SaleLine** saleLines;
     int amountOfSaleLines;
     int maxAmountOfSaleLines;
 
 }Sale;
+
+Sale* createSale(int code, int discount, int initialAmountOfSaleLines);
+Sale* destroySale(Sale* sale);
+
+void addNewSaleLine(Sale* sale, SaleLine* saleLine);
+
 
 #endif //EJERCICIO2_SALES_H
