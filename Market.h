@@ -23,18 +23,15 @@ typedef struct market{
     int amountOfFactories;
     int maxCapacityOfFactories;
 
-
-
-
 }Market;
 
-Market* createMarket(Product** products, int amountOfProducts, int maxCapacityOfProducts);
+Market* createMarket(int initialCapacityOfArrays);
+void destroyMarket(Market* market);
 
-//Factory* getProduct(int idFactory);
-//Factory* getProvider(int idFactory);
-//Factory* getFactory(int idFactory);
+void addNewProduct(Market* market, Product* product);
+void addNewProvider(Market* market, Provider* provider);
+void addNewFactory(Market* market, Factory* factory);
 
+void printMarket(Market* market);
 
-
-void freeMarket(Market* market);
 #endif //EJERCICIO2_MARKET_H

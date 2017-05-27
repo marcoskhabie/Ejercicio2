@@ -10,9 +10,9 @@ RegisteredUser* createUser(  char* name, int dni, int direction, int tel, char* 
 
     RegisteredUser* newRegisteredUser = malloc(sizeof(RegisteredUser));
 
-    newRegisteredUser->name= malloc(sizeof(char)* strlen(name));
-    newRegisteredUser->country= malloc(sizeof(char)* strlen(country));
-    newRegisteredUser->province= malloc(sizeof(char)* strlen(province));
+    newRegisteredUser->name= malloc(sizeof(char)* (strlen(name)+1));
+    newRegisteredUser->country= malloc(sizeof(char)* (strlen(country)+1));
+    newRegisteredUser->province= malloc(sizeof(char)* (strlen(province)+1));
 
     strcpy(newRegisteredUser->name,name);
     strcpy(newRegisteredUser->country,country);
@@ -24,46 +24,69 @@ RegisteredUser* createUser(  char* name, int dni, int direction, int tel, char* 
     newRegisteredUser->zipCode=zipCode;
     newRegisteredUser->type=type;
 
+    newRegisteredUser->sales = malloc(sizeof(Sale*) * 10);
+    newRegisteredUser->amountOfSales = 0;
+    newRegisteredUser->maxAmountOfSales = 10;
+
     return newRegisteredUser;
 }
 
-void addProduct(RegisteredUser* registeredUser,Market* market,Product* product){
-    if (registeredUser->type==1){
-        if(market->amountOfProducts==market->maxCapacityOfProducts) {
-            market->products = realloc(market->products, sizeof(Product *) * market->maxCapacityOfProducts * 2);
-            market->maxCapacityOfProducts = market->maxCapacityOfProducts * 2;
-        }
-        market->products[market->amountOfProducts]=product;
-        market->amountOfProducts++;
-        }
-    else{
-        printf("you are not an admin");
-    }
-}
-void addProvider(RegisteredUser* registeredUser,Market* market, Provider* provider){
-    if (registeredUser->type==1){
-        if(market->amountOfProviders==market->maxCapacityOfProviders) {
-            market->providers = realloc(market->providers, sizeof(Provider *) * market->maxCapacityOfProviders * 2);
-            market->maxCapacityOfProviders = market->maxCapacityOfProviders * 2;
-        }
-        market->providers[market->amountOfProviders]=provider;
-        market->amountOfProviders++;
+void adminAddsProduct(RegisteredUser* registeredUser,Market* market,Product* product){
+    if (registeredUser->type==1) {
+        addNewProduct(market, product);
     }
     else{
         printf("you are not an admin");
     }
 }
-void addFactory(RegisteredUser* registeredUser,Market* market, Factory* factory){
+void adminAddsProvider(RegisteredUser* registeredUser,Market* market, Provider* provider){
     if (registeredUser->type==1){
-        if(market->amountOfFactories==market->maxCapacityOfFactories) {
-            market->factories = realloc(market->factories, sizeof(Factory *) * market->maxCapacityOfFactories * 2);
-            market->maxCapacityOfFactories = market->maxCapacityOfFactories * 2;
-        }
-        market->factories[market->amountOfProducts]=factory;
-        market->amountOfFactories++;
+        addNewProvider(market, provider);
     }
     else{
         printf("you are not an admin");
+    }
+}
+void adminAddsFactory(RegisteredUser* registeredUser,Market* market, Factory* factory){
+    if (registeredUser->type==1){
+        addNewFactory(market, factory);
+    }
+    else{
+        printf("you are not an admin");
+    }
+}
+
+void addNewSale(RegisteredUser* user, Sale* newSale){
+    if(user->type == 0) {
+        if (user->amountOfSales == user->maxAmountOfSales) {
+            user->sales = realloc(user->sales, sizeof(Sale *) * user->maxAmountOfSales * 2);
+            user->maxAmountOfSales = user->maxAmountOfSales * 2;
+        }
+        user->sales[user->amountOfSales] = newSale;
+        user->amountOfSales++;
+    }
+    else{
+        printf("You are not a client.");
+    }
+}
+
+void addNewSaleLineToSale(RegisteredUser* user, int saleCode, SaleLine* newSaleLine){
+    if(user->type == 0) {
+        Sale *sale = findSale(user, saleCode);
+        addNewSaleLine(sale, newSaleLine);
+    }
+    else{
+        printf("You are not a client.");
+    }
+
+
+}
+
+Sale* findSale(RegisteredUser* user, int saleCode){
+    for (int i = 0; i < user->amountOfSales; ++i) {
+        if(user->sales[i]->code == saleCode){
+            return user->sales[i];
+        }
     }
 }
 
