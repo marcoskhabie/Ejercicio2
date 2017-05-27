@@ -7,6 +7,7 @@
 
 #include "Product.h"
 
+
 typedef struct provider{
 
     char* name;
@@ -23,7 +24,6 @@ typedef struct provider{
 }Provider;
 
 Provider* createProvider(    int direction,int tel, int locality, char* province, char* country,char* zipCode, Product** productsToProvide);
-void provide(Market* market);
 
 void freeProvider(Provider* provider);
 

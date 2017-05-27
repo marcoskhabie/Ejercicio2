@@ -12,4 +12,6 @@ typedef struct factory{
 
 }Factory;
 
+Factory* createFactory(char* name, int id);
+void freeFactory(Factory* factory);
 #endif //EJERCICIO2_FACTORY_H

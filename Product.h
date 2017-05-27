@@ -17,19 +17,23 @@ typedef struct product{
     int idFactory;
     double price;
 
-    int type; // 1 for camara, 0 for accessory.
+    int type; //  0 for accessory,1 for camera.
 
     double megaPixels;
     double screen;
     double zoom;
-    enum Type;
+    int typeOfCamera; //0 for reflex 1 for compact.
 
     char* typeOfAccessory;
     char* description;
 }Product;
 
-Product* createCamara(char* name, int codeNumber, double price, int type, double megaPixels, double screen, double zoom,enum Type, int idProvider,int idFactory);
+
+Product* createCamera(char* name,int typeOfCamera, int codeNumber, double price, int type, double megaPixels, double screen, double zoom, int idProvider,int idFactory);
+
 Product* createAccessory(char* name, int codeNumber, double price, int type, char* typeOfAccessory, char* description, int idProvider,int idFactory);
+
+void printProduct(Product* product);
 void destroyProduct(Product* product);
 
 #endif //EJERCICIO2_PRODUCT_H
