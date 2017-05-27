@@ -14,7 +14,7 @@ typedef struct registeredUser{
 
     char* name;
     int dni;
-    int direction;
+    char* direction;
     int tel;
     char* province;
     char* country;
@@ -27,7 +27,7 @@ typedef struct registeredUser{
 
 }RegisteredUser;
 
-RegisteredUser* createUser(  char* name, int dni, int direction, int tel, char* province, char* country, int zipCode, int type);
+RegisteredUser* createUser(  char* name, int dni, char* direction, int tel, char* province, char* country, int zipCode, int type);
 
 void adminAddsProduct(RegisteredUser* registeredUser,Market* market,Product* product);
 void adminAddsProvider(RegisteredUser* registeredUser,Market* market, Provider* provider);
@@ -36,8 +36,9 @@ void adminAddsFactory(RegisteredUser* registeredUser,Market* market, Factory* fa
 void addNewSale(RegisteredUser* user, Sale* newSale);
 void addNewSaleLineToSale(RegisteredUser* user, int saleCode, SaleLine* newSaleLine);
 
-Sale* findSale(RegisteredUser* user, int saleCode);
+void printUser(RegisteredUser* user);
 
+Sale* findSale(RegisteredUser* user, int saleCode);
 void freeUser(RegisteredUser* registeredUser);
 
 

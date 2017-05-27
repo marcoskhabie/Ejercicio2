@@ -6,7 +6,7 @@
 #include <string.h>
 #include <printf.h>
 #include "RegisteredUser.h"
-RegisteredUser* createUser(  char* name, int dni, int direction, int tel, char* province, char* country, int zipCode, int type){
+RegisteredUser* createUser(  char* name, int dni, char* direction, int tel, char* province, char* country, int zipCode, int type){
 
     RegisteredUser* newRegisteredUser = malloc(sizeof(RegisteredUser));
 
@@ -78,9 +78,22 @@ void addNewSaleLineToSale(RegisteredUser* user, int saleCode, SaleLine* newSaleL
     else{
         printf("You are not a client.");
     }
-
-
 }
+
+void printUser(RegisteredUser* user){
+
+    printf("Name: %s, ",user->name);
+    printf("DNI: %d, ", user->dni);
+    printf("Type of user: ");
+    if(user->type == 1){
+        printf("ADMIN");
+    }
+    else{
+        printf("CLIENT");
+    }
+    printf("\n");
+}
+
 
 Sale* findSale(RegisteredUser* user, int saleCode){
     for (int i = 0; i < user->amountOfSales; ++i) {
@@ -88,6 +101,7 @@ Sale* findSale(RegisteredUser* user, int saleCode){
             return user->sales[i];
         }
     }
+    return NULL;
 }
 
 
