@@ -38,6 +38,16 @@ void destroyMarket(Market* market){
     free(market);
 }
 
+Product* getProduct(Market* market,int code){
+    for (int i = 0; i < market->amountOfProducts; ++i) {
+        if(market->products[i]->codeNumber == code){
+            return market->products[i];
+        }
+    }
+    return NULL;
+}
+
+
 void addNewProduct(Market* market, Product* product){
     if(market->amountOfProducts==market->maxCapacityOfProducts) {
         market->products = realloc(market->products, sizeof(Product *) * market->maxCapacityOfProducts * 2);
@@ -66,17 +76,23 @@ void addNewFactory(Market* market, Factory* factory){
 }
 
 void printMarket(Market* market){
-    printf("-- Market info -- \nProducts: \n");
+    printf("-- Market info -- \n(PRODUCTS) \n");
     for (int i = 0; i < market->amountOfProducts; ++i) {
         printProduct(market->products[i]);
     }
-    printf("Factories: \n");
+    printf("(FACTORIES) \n");
     for (int j = 0; j < market->amountOfFactories; ++j) {
         printFactory(market->factories[j]);
     }
-    printf("Providers: \n");
+    printf("(PROVIDERS) \n");
     for (int k = 0; k < market->amountOfProviders; ++k) {
         printProvider(market->providers[k]);
     }
+}
 
+void printProducts(Market* market){
+    printf("Products available in the market\n");
+    for (int i = 0; i < market->amountOfProducts; ++i) {
+        printProduct(market->products[i]);
+    }
 }

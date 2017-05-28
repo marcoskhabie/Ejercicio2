@@ -28,10 +28,13 @@ typedef struct market{
 Market* createMarket(int initialCapacityOfArrays);
 void destroyMarket(Market* market);
 
+Product* getProduct(Market* market,int code);
+
 void addNewProduct(Market* market, Product* product);
 void addNewProvider(Market* market, Provider* provider);
 void addNewFactory(Market* market, Factory* factory);
 
 void printMarket(Market* market);
+void printProducts(Market* market);
 
 #endif //EJERCICIO2_MARKET_H

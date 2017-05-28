@@ -24,6 +24,125 @@ RegisteredUser* askForDNIAndfindUser(RegisteredUser** listOfUsers, int amt){
     printf("No user has the dni entered.");
 }
 
+Product* newProduct(){
+    char name[20];
+    int code;
+    double price;
+    int idProvider;
+    int idFactory;
+    int typeOfProduct;
+    printf("--Enter information of new product--\n");
+    printf("Enter your name: ");
+    scanf("%s", name);
+    printf("Enter code number: ");
+    scanf("%d", &code);
+    printf("Price of product: ");
+    scanf("%lf", &price);
+    printf("Id of the provider: ");
+    scanf("%d", &idProvider);
+    printf("Id of the factory: ");
+    scanf("%d", &idFactory);
+    printf("Camera (1) or a Accessory(0): ");
+    scanf("%d", &typeOfProduct);
+    if(typeOfProduct == 1){
+        int typeOfCamera;
+        double megaPixels;
+        double screen;
+        double zoom;
+        printf("Compact (1) or Reflex(0): ");
+        scanf("%d", &typeOfCamera);
+        printf("megaPixels: ");
+        scanf("%lf", &megaPixels);
+        printf("screen size: ");
+        scanf("%lf", &screen);
+        printf("zoom: ");
+        scanf("%lf", &zoom);
+        return createCamera(name,typeOfCamera,code,price,megaPixels,screen,zoom,idProvider,idFactory);
+    }
+    else{
+        char typeOfAccessory[20];
+        char description[20];
+        printf("Type of accessory: ");
+        scanf("%s", typeOfAccessory);
+        printf("Description: ");
+        scanf("%s", description);
+        return createAccessory(name,code,price,typeOfAccessory,description,idProvider,idFactory);
+    }
+
+}
+
+Factory* newFactory(){
+    char name[20];
+    int id;
+    printf("--Registering new factory--\n");
+    printf("Enter name: ");
+    scanf("%s", name);
+    printf("Enter id number: ");
+    scanf("%d", &id);
+    return createFactory(name, id);
+}
+
+Provider* newProvider(){
+    char name[20];
+    int id;
+    int telephone;
+    char country[20];
+    char province[20];
+    char locality[20];
+    char direction[20];
+    int zipCode;
+
+    printf("--Registering new provider--\n");
+    printf("Enter name: ");
+    scanf("%s", name);
+    printf("Enter id number: ");
+    scanf("%d", &id);
+    printf("Enter telephone number: ");
+    scanf("%d", &telephone);
+    printf("Country: ");
+    scanf("%s", country);
+    printf("Province: ");
+    scanf("%s", province);
+    printf("Locality: ");
+    scanf("%s", locality);
+    printf("Direction: ");
+    scanf("%s", direction);
+    printf("zip code: ");
+    scanf("%d", &zipCode);
+
+    return createProvider(name,id,direction,telephone,locality,province,country,zipCode);
+}
+
+Sale* askForValuesAndCreateSale(){
+    int code;
+    double discount;
+    printf("--Creating new Sale--\n");
+    printf("Enter code of sale: ");
+    scanf("%d",&code);
+    printf("Discount of the sale: ");
+    scanf("%lf", &discount);
+    return createSale(code, discount,10);
+}
+
+void askForSaleNumberAndCreateNewSaleLine(RegisteredUser* user, Market* market){
+    int code;
+    printf("Enter the code of the sale: ");
+    scanf("%d",&code);
+
+    int saleLineCode;
+    int codeOfProduct;
+    int amount;
+    printf("--Creating new sale line--\n");
+    printf("code of the sale line: ");
+    scanf("%d",&saleLineCode);
+    printf("code of the product: ");
+    scanf("%d", &codeOfProduct);
+    printf("quantity of the specified product: ");
+    scanf("%d", &amount);
+
+    addNewSaleLineToSale(user,code,createSaleLine(saleLineCode,
+                                                  getProduct(market,codeOfProduct),amount));
+}
 int main() {
       RegisteredUser* client1 = createUser("Agustin", 40269313, "5th Avenue",30202302,"New York","U.S.A.", 1252, 0);
     RegisteredUser* client2 = createUser("Marcos", 40265403, "Cabildo",543020202,"Buenos Aires","Argentina", 1010, 0);
@@ -37,22 +156,24 @@ int main() {
     listOfUsers[3] = admin2;
 
     Market* market = createMarket(10);
+
     addNewProvider(market, createProvider("BestBuy", 1, "San Martin", 3020302, "pilar", "Buenos Aires", "Argentina",1202));
-    addNewProduct(market, createCamera("Canon", 1, 101, 4500,3.2,21.5,4,1,1));
-    /*
-     *
-     *
-     * Hay que hardcodear el market un poco.
-     *
-     *
-     */
+    addNewFactory(market, createFactory("Tech factory",10));
+    addNewProduct(market, createCamera("Canon",1, 101, 4500,3.2,21.5,4,1,10));
+    addNewProduct(market, createCamera("Sony",0,212,4000,6,12,7,1,10));
+    addNewProduct(market, createAccessory("Tripod",98,250,"stabilizer","rigid tripod",1,10));
+    addNewProduct(market, createAccessory("Modular microphone",32,600,"directional mic.","",1,10));
+
+    addNewSale(client1, createSale(13, 0.05,10));
+    addNewSaleLineToSale(client1,13,createSaleLine(15, getProduct(market, 101),3));
+
 
     int closeProgram = 0;
     RegisteredUser* selectedUser = listOfUsers[2];
 
     while(closeProgram != 1) {
         int action = -1;
-        printf("Current User: ");
+        printf("\nCurrent User: ");
         printUser(selectedUser);
         printf("\n");
         if (selectedUser->type == 0) {
@@ -72,7 +193,18 @@ int main() {
                     printListOfUsers(listOfUsers, 4);
                     selectedUser = askForDNIAndfindUser(listOfUsers,4);
                     break;
-
+                case 2:
+                    printProducts(market);
+                    break;
+                case 3:
+                    printSalesOfUser(selectedUser);
+                    break;
+                case 4:
+                    addNewSale(selectedUser, askForValuesAndCreateSale());
+                    break;
+                case 5:
+                    askForSaleNumberAndCreateNewSaleLine(selectedUser, market);
+                    break;
                 case 6:
                     closeProgram =1;
                     printf("Hope the system was useful!");
@@ -99,7 +231,18 @@ int main() {
                     printListOfUsers(listOfUsers, 4);
                     selectedUser = askForDNIAndfindUser(listOfUsers,4);
                     break;
-
+                case 2:
+                    printMarket(market);
+                    break;
+                case 3:
+                    adminAddsProduct(selectedUser,market, newProduct());
+                    break;
+                case 4:
+                    adminAddsProvider(selectedUser, market, newProvider());
+                    break;
+                case 5:
+                    adminAddsFactory(selectedUser, market, newFactory());
+                    break;
                 case 6:
                     closeProgram =1;
                     printf("Hope the system was useful!");

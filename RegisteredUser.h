@@ -37,6 +37,7 @@ void addNewSale(RegisteredUser* user, Sale* newSale);
 void addNewSaleLineToSale(RegisteredUser* user, int saleCode, SaleLine* newSaleLine);
 
 void printUser(RegisteredUser* user);
+void printSalesOfUser(RegisteredUser* user);
 
 Sale* findSale(RegisteredUser* user, int saleCode);
 void freeUser(RegisteredUser* registeredUser);

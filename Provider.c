@@ -32,18 +32,12 @@ Provider* createProvider(  char* name,int id, char* direction,int tel, char* loc
 }
 void printProvider(Provider* provider){
 
-    printf("Name of provider %s \n", provider->name);
-    printf("Country of provider %s \n", provider->country);
-    printf("Province of provider %s \n", provider->province);
-    printf("Locality of provider %s \n", provider->locality);
-    printf("Direction of provider %s \n", provider->direction);
-
-    printf("Tel: %d \n", provider->tel);
+    printf("Name of provider %s, ", provider->name);
+    printf("id number: %d, ", provider->id);
+    printf("country: %s, ", provider->country);
+    printf("province: %s, ", provider->province);
+    printf("locality: %s,", provider->locality);
     printf("ZipCode: %d \n", provider->zipCode);
-
-
-
-
 }
 void freeProvider(Provider* provider){
 

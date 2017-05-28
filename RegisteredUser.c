@@ -94,6 +94,16 @@ void printUser(RegisteredUser* user){
     printf("\n");
 }
 
+void printSalesOfUser(RegisteredUser* user) {
+    if (user->amountOfSales == 0) {
+        printf("There are no sales registered.");
+    } else {
+        for (int i = 0; i < user->amountOfSales; ++i) {
+            printSale(user->sales[i]);
+        }
+    }
+}
+
 
 Sale* findSale(RegisteredUser* user, int saleCode){
     for (int i = 0; i < user->amountOfSales; ++i) {

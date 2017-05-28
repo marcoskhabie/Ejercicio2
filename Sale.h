@@ -19,9 +19,10 @@ typedef struct sale{
 
 }Sale;
 
-Sale* createSale(int code, int discount, int initialAmountOfSaleLines);
+Sale* createSale(int code, double discount, int initialAmountOfSaleLines);
 Sale* destroySale(Sale* sale);
 
+void printSale(Sale* sale);
 void addNewSaleLine(Sale* sale, SaleLine* saleLine);
 
 

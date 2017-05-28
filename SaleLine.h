@@ -18,4 +18,6 @@ SaleLine* createSaleLine(int code, Product* product, int amount);
 void destroySaleLine(SaleLine* saleLine);
 double priceOfSaleLine(SaleLine* saleLine);
 
+void printSaleLine(SaleLine* saleLine);
+
 #endif //EJERCICIO2_SALELINE_H

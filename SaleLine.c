@@ -3,6 +3,7 @@
 //
 
 #include <stdlib.h>
+#include <printf.h>
 #include "SaleLine.h"
 
 SaleLine* createSaleLine(int code, Product* product, int amount){
@@ -10,6 +11,8 @@ SaleLine* createSaleLine(int code, Product* product, int amount){
     newSaleLine->code = code;
     newSaleLine->product = product;
     newSaleLine->amount = amount;
+
+    return newSaleLine;
 }
 void destroySaleLine(SaleLine* saleLine){
     free(saleLine);
@@ -17,3 +20,11 @@ void destroySaleLine(SaleLine* saleLine){
 double priceOfSaleLine(SaleLine* saleLine){
     return saleLine->product->price * saleLine->amount;
 }
+
+void printSaleLine(SaleLine* saleLine){
+    printf("Product: %s ", saleLine->product->name);
+    printf("(code: %d), ", saleLine->product->codeNumber);
+    printf("amount: %d \n", saleLine->amount);
+
+}
+

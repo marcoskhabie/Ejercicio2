@@ -23,7 +23,7 @@ Factory* createFactory(char* name, int id){
 }
 void printFactory(Factory* factory){
 
-    printf("Name of factory %s \n", factory->name);
+    printf("Name of factory %s, ", factory->name);
     printf("Code number: %d \n", factory->id);
 
 }

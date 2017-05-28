@@ -51,19 +51,20 @@ Product* createAccessory(char* name, int codeNumber, double price, char* typeOfA
 
 void printProduct(Product* product){
 
-    printf("Name of product %s \n", product->name);
-    printf("Code number: %d \n", product->codeNumber);
-    printf("Id of provider: %d \n", product->idProvider);
-    printf("Id of factory: %d \n", product->idFactory);
-    printf("Id of factory: %d \n", product->idFactory);
+    printf("Name of product %s, ", product->name);
+    printf("Code number: %d,", product->codeNumber);
+    printf("Price: %lf,", product->price);
+    printf("Id of provider: %d,", product->idProvider);
+    printf("Id of factory: %d. \n", product->idFactory);
+    printf("Additional information -> ");
 
     if(product->type==1){
-        printf("Type: Camera \n");
+        printf("product type: Camera, ");
 
-        printf("MegaPixels: %f \n", product->megaPixels);
-        printf("Screen: %f \n", product->screen);
-        printf("Zoom: %f \n", product->zoom);
-        if (product->typeOfCamera==1){
+        printf("MegaPixels: %f,", product->megaPixels);
+        printf("Screen: %f, ", product->screen);
+        printf("Zoom: %f, ", product->zoom);
+        if (product->typeOfCamera==0){
             printf("Type of Camera : Reflex  \n" );
         }
 
@@ -72,10 +73,10 @@ void printProduct(Product* product){
 
     }
     else{
-        printf("Type: Accessory \n");
+        printf("product type: Accessory, ");
 
-        printf("Name of product %s \n", product->typeOfAccessory);
-        printf("Name of product %s \n", product->description);
+        printf("%s, ", product->typeOfAccessory);
+        printf("%s \n", product->description);
     }
 
 
