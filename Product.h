@@ -5,10 +5,6 @@
 #ifndef EJERCICIO2_PRODUCT_H
 #define EJERCICIO2_PRODUCT_H
 
-enum TypeOf{
-    REFLEX,
-    COMPACT
-};
 
 typedef struct product{
     char* name;
