@@ -32,7 +32,7 @@ Product* newProduct(){
     int idFactory;
     int typeOfProduct;
     printf("--Enter information of new product--\n");
-    printf("Enter your name: ");
+    printf("Enter name: ");
     scanf("%s", name);
     printf("Enter code number: ");
     scanf("%d", &code);
